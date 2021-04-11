@@ -14,8 +14,7 @@ func DownloadAudio(url string) (string, error) {
 	}
 
 	videoTitle := video.Title
-	// TODO: get user name
-	filename := fmt.Sprintf("/home/levi/music/%s.mp3", videoTitle)
+	filename := fmt.Sprintf("music/%s.mp3", videoTitle)
 
 	cmd := exec.Command("youtube-dl", "-x", "--audio-format", "mp3", "-o", filename, url)
 	err = cmd.Run()
