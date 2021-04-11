@@ -7,3 +7,9 @@ build:
 run: build
 	source env.sh
 	./.bin/bot
+
+build-image:
+	docker build -t bot .
+
+start-container:
+	docker run --name bot --env-file .env bot
