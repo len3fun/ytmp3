@@ -32,6 +32,14 @@ func (b *Bot) handleUnknownCommand(message *tgbotapi.Message) error {
 
 func (b *Bot) handleMessage(message *tgbotapi.Message) {
 	// TODO: youtube link checker
+	if !youtube.IsYoutubeLink(message.Text) {
+		isNotYTLinkMessage := tgbotapi.NewMessage(message.Chat.ID, "It's not a youtube link")
+		_, err := b.bot.Send(isNotYTLinkMessage)
+		if err != nil {
+			fmt.Println("Send message to user error")
+		}
+		return
+	}
 	downloadStartedMessage := tgbotapi.NewMessage(message.Chat.ID, "Video downloading has been started")
 	_, err := b.bot.Send(downloadStartedMessage)
 	if err != nil {

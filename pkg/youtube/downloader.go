@@ -4,9 +4,14 @@ import (
 	"fmt"
 	yt "github.com/knadh/go-get-youtube/youtube"
 	"os/exec"
+	"strings"
 )
 
 func DownloadAudio(url string) (string, error) {
+	if IsShortUrl(url) {
+		splitedUrl := strings.Split(url, "/")
+		url = splitedUrl[len(splitedUrl)-1]
+	}
 	video, err := yt.Get(url)
 	if err != nil {
 		fmt.Println("Get video error:", err)
